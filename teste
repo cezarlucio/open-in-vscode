@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <time.h>
+
+int main() {
+    char nome[50];
+    int ru, lastDigitoRU, lastDigitoAnoAtual;
+
+    printf("Digite seu nome completo: ");
+    fgets(nome, sizeof(nome), stdin); // Solicita e lê o nome completo do aluno
+
+    printf("Digite os sete dígitos do seu RU: ");
+    scanf("%d", &ru); // Solicita e lê os sete dígitos do RU do aluno
+
+    lastDigitoRU = ru % 10; // Calcula o último dígito do RU
+
+    time_t now = time(NULL); // Obtém o tempo atual em segundos 
+    struct tm *localTime = localtime(&now); // Converte o tempo atual para uma estrutura de data e hora local
+    lastDigitoAnoAtual = localTime->tm_year % 10; // Obtém o último dígito do ano atual
+
+    if (lastDigitoRU == lastDigitoAnoAtual) {
+        printf("Aluno %s, seu RU está autenticado.\n", nome); // Verifica se o último dígito do RU é igual ao último dígito do ano atual
+    } else {
+        printf("Aluno %s, seu RU não está autenticado.\n", nome); // Caso contrário, exibe a mensagem de RU não autenticado
+    }
+
+    return 0;
+}
